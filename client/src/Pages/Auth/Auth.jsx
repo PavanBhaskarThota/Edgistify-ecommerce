@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { Box, Button, Typography } from "@mui/material";
 import { DynamicInput } from "../../Components/DynamicComponents/DynamicInput";
 import { createUser, loginUser } from "../../Redux/Slices/userSlice";
+import { Loading } from "../../Components/Loader/Loading";
 
 export const Auth = () => {
   const dispatch = useDispatch();
@@ -42,13 +43,13 @@ export const Auth = () => {
       }
     }
 
-    console.log(user)
+    console.log(user);
 
-     if(isSigned) {
+    if (isSigned) {
       dispatch(loginUser(user));
-     } else {
+    } else {
       dispatch(createUser(user));
-     }
+    }
   };
 
   if (status === "success") {
@@ -94,7 +95,7 @@ export const Auth = () => {
     },
   ];
 
-  console.log(status)
+  console.log(status);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -103,7 +104,7 @@ export const Auth = () => {
   }, [isAuthenticated]);
 
   if (status === "loading") {
-    return <div>loading.....</div>;
+    return <Loading />;
   }
 
   return (
@@ -112,17 +113,19 @@ export const Auth = () => {
         display: "flex",
         flexDirection: "column",
         gap: "10px",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: "10px",
+        justifyContent: {xs:"start", md:"center"},
+        alignItems: {xs:"center", md:"center"},
+        minHeight: "90vh",
+        bgcolor: "#ECDFCC",
       }}
     >
       <Box
         sx={{
           boxShadow: "0px 0px 1px 0px #000000",
-          width: "50%",
+          width: {xs:"90%", sm:"40%", md:"30%"},
           padding: "10px",
           borderRadius: "10px",
+          marginTop:{xs:'30px'}
         }}
       >
         <Typography variant="h4" textAlign={"center"}>
@@ -130,7 +133,7 @@ export const Auth = () => {
         </Typography>
         <form
           style={{
-            width: "80%",
+            width: "90%",
             margin: "auto",
             padding: "20px",
             borderRadius: "20px",
@@ -141,20 +144,28 @@ export const Auth = () => {
             <DynamicInput key={input.name} {...input} />
           ))}
 
-          <Typography
+          <Button
             onClick={() =>
               setPasswordType(passwordType == "password" ? "text" : "password")
             }
-            sx={{ textAlign: "end", cursor: "pointer" }}
+            color={passwordType == "password" ? "success" : "error"}
+            variant="outlined"
+            sx={{
+              textAlign: "end",
+              cursor: "pointer",
+              display: "block",
+              marginLeft: "auto",
+            }}
           >
             {passwordType == "password" ? "Show" : "Hide"}
-          </Typography>
+          </Button>
           <Button
             sx={{
               display: "block",
               height: "50px",
               padding: "10px",
               margin: "20px 0px",
+              bgcolor:'#5C3D2E'
             }}
             fullWidth
             variant="contained"

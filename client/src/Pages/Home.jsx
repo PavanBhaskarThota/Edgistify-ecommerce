@@ -12,13 +12,16 @@ import {
   Toolbar,
 } from "@mui/material";
 import { Chair, Weekend, TableBar } from "@mui/icons-material";
+import image1 from "../Assets/Home/image1.png"
+import image2 from "../Assets/Home/image2.png"
+import image3 from "../Assets/Home/image3.jpg"
+import image4 from "../Assets/Home/image4.jpg"
 
 export const Home = () => {
   return (
     <Box sx={{ 
-      // backgroundColor: "#ECDFCC",
-      backgroundColor: "#fff",
-      borderTop: "1px solid #ccc",
+      backgroundColor: "#ECDFCC",
+      // backgroundColor: "#fff",
        minHeight: "100vh" }}>
       <Box sx={{ textAlign: "center", py: 6 }}>
         <Typography variant="h2" fontWeight="bold">
@@ -34,7 +37,7 @@ export const Home = () => {
             <CardMedia
               component="img"
               height="300"
-              image="/sofa.jpg"
+              image={image1}
               alt="Sofa"
             />
           </Grid>
@@ -68,17 +71,17 @@ export const Home = () => {
       {[
         {
           title: "Elegant Tables",
-          image: "/table.jpg",
+          image: image2,
           description: "Beautifully designed tables to match any interior.",
         },
         {
           title: "Office Chairs",
-          image: "/office-chair.jpg",
+          image: image3,
           description: "Ergonomic office chairs for maximum productivity.",
         },
         {
           title: "Premium Chairs",
-          image: "/premium-chair.jpg",
+          image: image4,
           description: "High-quality chairs for ultimate comfort.",
         },
       ].map((section, index) => (

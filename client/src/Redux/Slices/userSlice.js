@@ -72,6 +72,7 @@ const userSlice = createSlice({
       state.user = null;
       state.status = "";
       state.error = "";
+      window.location.reload();
     },
   },
   extraReducers: (builder) => {

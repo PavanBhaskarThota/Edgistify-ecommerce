@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import productServices from "../../Services/productsServices";
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { ProductCard } from "./components/ProductCard";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { Navigate } from "react-router-dom";
+import { Loading } from "../../Components/Loader/Loading";
 
 export const Products = () => {
   const [products, setProducts] = useState([]);
@@ -27,14 +28,21 @@ export const Products = () => {
     fetchProducts();
   }, []);
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <Loading />;
 
   return (
-    <Grid container spacing={2} sx={{ padding: "10px" }} w={'90%'}>
-      {products.length > 0 &&
-        products.map((product, index) => (
-          <ProductCard key={index} product={product}/>
-        ))}
-    </Grid>
+    <Box backgroundColor="#ECDFCC">
+      <Grid
+        container
+        spacing={2}
+        sx={{ width: "90%", margin: "auto", py: 4 }}
+       
+      >
+        {products.length > 0 &&
+          products.map((product, index) => (
+            <ProductCard key={index} product={product} />
+          ))}
+      </Grid>
+    </Box>
   );
 };

@@ -11,7 +11,7 @@ import { getCartItems } from "../../Redux/Slices/cartSlice";
 export const Navbar = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.users);
-  const { totalQuantity } = useSelector((state) => state.cart);
+  const { totalQuantity, cartItems } = useSelector((state) => state.cart);
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -29,16 +29,6 @@ export const Navbar = () => {
 
   const fetchUser = () => {
     dispatch(getUser());
-  };
-
-  const fetchCart = async (id) => {
-    try {
-      const res = await cartServices.getCart(id);
-      console.log(res);
-      setCartItems(res.data.items.length);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   useEffect(() => {
@@ -64,6 +54,8 @@ export const Navbar = () => {
         padding: "10px",
         height: "7vh",
         boxShadow: "0px 0px 1px 0px #000000",
+        backgroundColor: "#ECDFCC",
+        borderBottom: "1px solid #8f8f8f",
       }}
     >
       <Box sx={{ display: "flex", gap: "10px" }}>
@@ -98,13 +90,21 @@ export const Navbar = () => {
                   border: "1px solid gray",
                   borderRadius: "25%",
                   padding: "5px",
+                  cursor: "pointer",
                 }}
                 onClick={() => navigate("/cart")}
               />
             </Badge>
 
-            <Avatar sx={{ width: 30, height: 30 }} />
-            <Typography sx={{ fontWeight: "500" }} onClick={handleClick}>
+            <Avatar sx={{ width: 30, height: 30 }} onClick={handleClick} />
+            <Typography
+              sx={{
+                fontWeight: "500",
+                cursor: "pointer",
+                display: { xs: "none", sm: "block" },
+              }}
+              onClick={handleClick}
+            >
               {user?.name.split(" ")[0]}
             </Typography>
 
@@ -120,15 +120,25 @@ export const Navbar = () => {
               sx={{ width: "200px" }}
             >
               <Box sx={{ padding: "10px" }}>
-
-              <Button variant="outlined" color="error" onClick={handleLogout}>
-                Logout
-              </Button>
+                <Typography
+                  sx={{
+                    fontWeight: "500",
+                    cursor: "pointer",
+                    display: { xs: "block", sm: "none" },
+                    py:2
+                  }}
+                  onClick={handleClick}
+                >
+                  {user?.name.split(" ")[0]}
+                </Typography>
+                <Button variant="outlined" color="error" onClick={handleLogout}>
+                  Logout
+                </Button>
               </Box>
             </Popover>
           </Box>
         ) : (
-          <Button variant="contained">
+          <Button variant="contained" sx={{ bgcolor: "#5C3D2E" }}>
             <Link
               style={{ textDecoration: "none", color: "white" }}
               to={"/auth"}

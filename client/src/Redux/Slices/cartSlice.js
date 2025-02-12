@@ -20,7 +20,7 @@ export const addToCart = createAsyncThunk(
   async ({ userId, productId, quantity }, { rejectWithValue }) => {
     try {
       const res = await cartServices.addItem(userId, productId, quantity);
-      console.log(res);
+      console.log(res.data);
       return res.data;
     } catch (error) {
       rejectWithValue(error.message);
@@ -34,8 +34,16 @@ const cartSlice = createSlice({
     cartItems: [],
     totalAmount: 0,
     totalQuantity: 0,
+    status: "",
   },
-  reducers: {},
+  reducers: {
+    clearCart: (state) => {
+      state.cartItems = [];
+      state.totalAmount = 0;
+      state.totalQuantity = 0;
+      state.status = "";
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -59,14 +67,27 @@ const cartSlice = createSlice({
         state.status = "loading";
       })
       .addCase(addToCart.fulfilled, (state, { payload }) => {
-        if (payload.message === "Product added to cart") {
-          toast.success(payload.message);
+        if (
+          payload.message === "Product added to cart" ||
+          payload.message === "Product removed from cart" ||
+          payload.message === "Product quantity updated"
+        ) {
+          payload.message === "Product removed from cart"
+            ? toast.error(payload.message)
+            : toast.success(payload.message);
           state.cartItems = payload.cart.items;
           state.totalAmount = payload.cart.totalAmount;
           state.totalQuantity = payload.cart.items.length;
           state.status = "success";
+        } else if (payload.message === "Cart is empty") {
+          toast.error(payload.message);
+          state.cartItems = [];
+          state.totalQuantity = 0;
+          state.totalAmount = 0;
+          state.status = "success";
         } else {
           toast.error(payload.message);
+          state.status = "";
         }
       })
       .addCase(addToCart.rejected, (state) => {
@@ -75,4 +96,6 @@ const cartSlice = createSlice({
   },
 });
 
+
+export const { clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
