@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import api from "../../Api";
-import authServices from "../../Services/authservices";
-// import tokenServices from "../../services/tokenServices";
+import authServices from "../../Services/authServices";
 
 export const createUser = createAsyncThunk(
   "user/createUser",
