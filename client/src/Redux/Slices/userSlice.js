@@ -1,13 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import api from "../../Api";
+import authServices from "../../Services/authservices";
 // import tokenServices from "../../services/tokenServices";
 
 export const createUser = createAsyncThunk(
   "user/createUser",
   async (userData, { rejectWithValue }) => {
     try {
-      const res = await authServices.createUser(userData);
+      const res = await authServices.signup(userData);
+      console.log(res);
       if (res.status === 200) {
         return res.data;
       }
@@ -21,12 +23,14 @@ export const loginUser = createAsyncThunk(
   "user/loginUser",
   async (userData, { rejectWithValue }) => {
     try {
-      const res = await authServices.loginUser(userData);
+      const res = await authServices.login(userData);
+      console.log(res);
       if (res.status === 200) {
         console.log(res.data);
         return res.data;
       }
     } catch (error) {
+      console.log(error);
       return rejectWithValue(error.message);
     }
   }
@@ -63,7 +67,8 @@ const userSlice = createSlice({
     },
     logout: (state) => {
       toast.success("Logged out successfully");
-      // tokenServices.clearStorage();
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
       api.defaults.headers["Authorization"] = "";
       state.user = null;
       state.status = "";
@@ -92,7 +97,7 @@ const userSlice = createSlice({
           saveUserToLocalStorage(obj);
           state.status = "success";
           state.user = action.payload.user;
-        }else{
+        } else {
           state.status = "failed";
           if (action.payload.message) {
             state.error = action.payload.message;
@@ -111,8 +116,8 @@ const userSlice = createSlice({
         state.status = "loading";
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.status = "success";
-        state.user = action.payload;
+        // state.status = "success";
+        // state.user = action.payload;
 
         const obj = {
           user: action.payload.userDetails,
@@ -123,7 +128,7 @@ const userSlice = createSlice({
 
         const status = saveUserToLocalStorage(obj);
         if (status) {
-          state.status = "succeeded";
+          state.status = "success";
           state.user = action.payload.user;
         } else {
           state.status = "failed";

@@ -2,11 +2,11 @@ import api from "../Api";
 
 const authServices = {
   async login(user) {
-    await api.post("/user/login", user);
+    return await api.post("/user/login", {user:user});
   },
 
   async signup(user) {
-    await api.post("/user/signup", user);
+    return await api.post("/user/signup", {user:user});
   },
 };
 

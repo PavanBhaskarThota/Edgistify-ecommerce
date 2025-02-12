@@ -44,6 +44,7 @@ class UserService {
   }
 
   async login(user: any) {
+    console.log(user);
     try {
       const { email, password } = user;
       const userExists = await UserModel.findOne({ email });

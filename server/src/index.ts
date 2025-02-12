@@ -5,6 +5,7 @@ import userRoute from "./Routes/userRoute";
 import cors from "cors";
 import productRoute from "./Routes/productRoutes";
 import cartRoute from "./Routes/cartRoutes";
+import orderRoute from "./Routes/orderRoutes";
 
 const port = process.env.PORT || 3000;
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use("/user", userRoute);
 app.use("/items", productRoute);
 app.use("/cart", cartRoute);
+app.use("/order", orderRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
