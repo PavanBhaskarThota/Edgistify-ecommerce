@@ -116,7 +116,7 @@ export const Auth = () => {
         justifyContent: {xs:"start", md:"center"},
         alignItems: {xs:"center", md:"center"},
         minHeight: "90vh",
-        bgcolor: "#ECDFCC",
+        bgcolor: "#FFEFD5",
       }}
     >
       <Box

@@ -5,6 +5,7 @@ import { Products } from "../Pages/Products/Products";
 import { Auth } from "../Pages/Auth/Auth";
 import { PrivateRoute } from "./PrivateRoutes";
 import { Cart } from "../Pages/Cart";
+import { Orders } from "../Pages/Orders";
 
 export const MainRoutes = () => {
   return (
@@ -17,6 +18,14 @@ export const MainRoutes = () => {
         element={
           <PrivateRoute>
             <Cart />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/profile&orders"
+        element={
+          <PrivateRoute>
+            <Orders />
           </PrivateRoute>
         }
       />

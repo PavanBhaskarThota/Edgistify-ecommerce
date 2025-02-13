@@ -31,7 +31,7 @@ export const Products = () => {
   if (loading) return <Loading />;
 
   return (
-    <Box backgroundColor="#ECDFCC">
+    <Box backgroundColor="#FFEFD5">
       <Grid
         container
         spacing={2}

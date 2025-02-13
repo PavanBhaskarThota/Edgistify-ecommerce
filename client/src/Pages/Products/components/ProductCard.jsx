@@ -39,12 +39,12 @@ export const ProductCard = ({ product }) => {
   const findProduct = cartItems.find((item) => item.product === product._id);
 
   return (
-    <Grid item xs={12} sm={6} md={4} h={400}>
+    <Grid item xs={12} sm={6} md={4}>
       <Card sx={{ height: "450px", bgcolor: "#f8f8f8" }}>
         <CardMedia
           sx={{ height: "200px" }}
           image={product.images[0]}
-          title="green iguana"
+          // title="green iguana"
           bgcolor="red"
         />
         <Box
@@ -100,8 +100,7 @@ export const ProductCard = ({ product }) => {
                 <Button
                   variant="contained"
                   size="small"
-                  color="success"
-                  sx={{ display: "block", width:'50%' }}
+                  sx={{ display: "block", width:'50%', bgcolor:'#5C4033' }}
                   loading={status === "loading"}
                 >
                   <Link

@@ -87,7 +87,7 @@ export const Cart = () => {
   if (cart.status === "loading" || loading) return <Loading />;
 
   return (
-    <Box backgroundColor="#ECDFCC" py={4} minHeight={"80vh"}>
+    <Box backgroundColor="#FFEFD5" py={4} minHeight={"80vh"}>
       {cart.cartItems.length === 0 ? (
         <Typography variant="h5" textAlign="center">
           🛒 Cart is empty

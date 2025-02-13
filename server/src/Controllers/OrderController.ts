@@ -12,6 +12,16 @@ class OrderController {
       res.status(500).json({ error: error.message });
     }
   }
+
+  async getAllOrders(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const result = await OrderServices.getAllOrders(id);
+      res.status(200).json(result);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 }
 
 export default new OrderController();

@@ -20,8 +20,7 @@ import image4 from "../Assets/Home/image4.jpg"
 export const Home = () => {
   return (
     <Box sx={{ 
-      backgroundColor: "#ECDFCC",
-      // backgroundColor: "#fff",
+      backgroundColor: "#FFEFD5",
        minHeight: "100vh" }}>
       <Box sx={{ textAlign: "center", py: 6 }}>
         <Typography variant="h2" fontWeight="bold">

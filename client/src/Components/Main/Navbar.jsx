@@ -54,7 +54,7 @@ export const Navbar = () => {
         padding: "10px",
         height: "7vh",
         boxShadow: "0px 0px 1px 0px #000000",
-        backgroundColor: "#ECDFCC",
+        backgroundColor: "#FFEFD5",
         borderBottom: "1px solid #8f8f8f",
       }}
     >
@@ -96,7 +96,11 @@ export const Navbar = () => {
               />
             </Badge>
 
-            <Avatar sx={{ width: 30, height: 30 }} onClick={handleClick} />
+            <Avatar
+              sx={{ width: 30, height: 30, cursor: "pointer" }}
+              onClick={handleClick}
+              src="https://img.freepik.com/free-vector/blond-man-stylish-icon-isolated_24911-100835.jpg?ga=GA1.1.709686024.1684082835&semt=ais_authors_boost"
+            />
             <Typography
               sx={{
                 fontWeight: "500",
@@ -115,23 +119,38 @@ export const Navbar = () => {
               onClose={handleClose}
               anchorOrigin={{
                 vertical: "bottom",
-                horizontal: "left",
+                horizontal: "right",
               }}
               sx={{ width: "200px" }}
             >
-              <Box sx={{ padding: "10px" }}>
+              <Box sx={{ padding: "10px", maxWidth: "200px", textAlign: "center" }}>
                 <Typography
                   sx={{
                     fontWeight: "500",
                     cursor: "pointer",
                     display: { xs: "block", sm: "none" },
-                    py:2
+                    py: 1,
                   }}
-                  onClick={handleClick}
                 >
                   {user?.name.split(" ")[0]}
                 </Typography>
-                <Button variant="outlined" color="error" onClick={handleLogout}>
+
+                <Typography
+                  sx={{
+                    fontWeight: "500",
+                    cursor: "pointer",
+                    borderBottom: "1px solid lightgray",
+                    py: 1,
+                  }}
+                >
+                  <Link
+                    to={"/profile&orders"}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    Orders
+                  </Link>
+                </Typography>
+                <Button color="error" onClick={handleLogout}>
                   Logout
                 </Button>
               </Box>
