@@ -34,7 +34,6 @@ export const Navbar = () => {
   useEffect(() => {
     if (!user) {
       fetchUser();
-      console.log(user);
     } else {
       dispatch(getCartItems(user.userId));
     }

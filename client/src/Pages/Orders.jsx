@@ -33,8 +33,6 @@ export const Orders = () => {
     }
   };
 
-  console.log(orders);
-
   useEffect(() => {
     if (!user) dispatch(getUser());
     else fetchOrders(user.userId);
